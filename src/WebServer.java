@@ -4,22 +4,23 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Set;
 
 
 public class WebServer {
 
     int port;
+    HashMap<String, String> routing;
 
     public WebServer(int port) {
         this.port = port;
     }
 
-    String path;
-    String message;
-
-    public void addPath(String path, String message) {
-        this.path = path;
-        this.message = message;
+    public void addPath(HashMap<String, String> routing) {
+        this.routing = routing;
     }
 
     public void start() throws IOException {
@@ -40,14 +41,21 @@ public class WebServer {
     }
 
     private String handleRequest(String httpRequest) {
-        var message = "";
-        if (httpRequest.contains(path)) {
-            message = "You reached yolo path";
-        } else {
-            message = "Unknown";
+        String message = "";
+        String path = "";
+
+        Set set = routing.entrySet();
+        Iterator iterator = set.iterator();
+        while (iterator.hasNext()) {
+            Map.Entry entry = (Map.Entry) iterator.next();
+            path = entry.getKey().toString();
+            if (httpRequest.contains(path)) {
+                message = entry.getValue().toString();
+                return messageToResponse(message);
+            }
         }
 
-        return messageToResponse(message);
+        return messageToResponse("Unkown");
     }
 
     private static String messageToResponse(String message) {
@@ -84,4 +92,5 @@ public class WebServer {
         String httpResponse = httpResponseHeader + httpResponseBody;
         return httpResponse;
     }
+
 }
