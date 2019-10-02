@@ -9,6 +9,7 @@ public class WebApplication {
         HashMap<String, String> routing = new HashMap<>();
         routing.put("yolo", "reached yolo");
         routing.put("sup", "reached sup");
+        routing.put("pdf", "resources/sample.pdf");
 
 
         WebServer webServer = new WebServer(8080);
