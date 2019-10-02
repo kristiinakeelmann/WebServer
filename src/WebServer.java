@@ -62,25 +62,19 @@ public class WebServer {
 
         String contentType;
         String httpResponseHeader;
+        byte [] httpResponseBody;
 
-        if (message.contains("pdf")) {
-            int contentLength = composeHttpResponseBodyPdf().length;
-            contentType = responseContentType(message);
-            httpResponseHeader = composeHttpResponseHeader(contentLength, contentType);
-            byte httpResponseBody[] = composeHttpResponseBodyPdf();
-            byte header[] = httpResponseHeader.getBytes();
-            byte body[] = httpResponseBody;
-
-            return getHttpResponseBytes(header, body);
+        if (message.endsWith("pdf")) {
+            httpResponseBody = composeHttpResponseBodyPdf();
+        } else {
+            httpResponseBody = composeHttpResponseBody(message);
         }
 
-        String httpResponseBody = composeHttpResponseBody(message);
-        int contentLength = httpResponseBody.length();
+        int contentLength = httpResponseBody.length;
         contentType = responseContentType(message);
         httpResponseHeader = composeHttpResponseHeader(contentLength, contentType);
         byte header[] = httpResponseHeader.getBytes();
-        byte body[] = httpResponseBody.getBytes();
-
+        byte body[] = httpResponseBody;
         return getHttpResponseBytes(header, body);
     }
 
@@ -118,7 +112,7 @@ public class WebServer {
     }
 
 
-    public static String composeHttpResponseBody(String message) {
+    public static byte[] composeHttpResponseBody(String message) {
 
         String httpResponseBody =
                 "<html>" +
@@ -126,7 +120,7 @@ public class WebServer {
                         "<h1>" + message + "</h1>" +
                         "</body>" +
                         "</html>";
-        return httpResponseBody;
+        return httpResponseBody.getBytes();
     }
 
     public static byte[] composeHttpResponseBodyPdf() throws IOException {
