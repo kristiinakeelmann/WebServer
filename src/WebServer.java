@@ -6,19 +6,42 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
 
+interface Action {
+}
+
+class HtmlAction implements Action {
+    String html;
+}
+
+class FileAction implements Action {
+    String filename;
+}
 
 public class WebServer {
 
     int port;
-    HashMap<String, String> routing;
+    HashMap<String, Action> routing = new HashMap<>();
 
     public WebServer(int port) {
         this.port = port;
     }
 
-    public void addPath(HashMap<String, String> routing) {
-        this.routing = routing;
+    public void addHtml(String path, String html) {
+        HtmlAction htmlAction = new HtmlAction();
+        htmlAction.html = html;
+        routing.put(path, htmlAction);
     }
+
+    public void addFile(String path, String filename) {
+        FileAction fileAction = new FileAction();
+        fileAction.filename = filename;
+        routing.put(path, fileAction);
+    }
+
+    public void addRedirect(String path, String target) {
+
+    }
+
 
     public void start() throws IOException {
 
@@ -40,7 +63,7 @@ public class WebServer {
 
     private byte[] handleRequest(String httpRequest) throws IOException {
 
-        String message = "";
+        Action action = null;
         String path = "";
 
         Set set = routing.entrySet();
@@ -50,28 +73,33 @@ public class WebServer {
             path = entry.getKey().toString();
 
             if (httpRequest.contains(path)) {
-                message = entry.getValue().toString();
-                return messageToResponse(message);
+                action = (Action) entry.getValue();
+                return actionToResponse(action);
             }
         }
 
-        return messageToResponse("Unkown");
+        HtmlAction htmlAction = new HtmlAction();
+        htmlAction.html = "Unknown";
+        return actionToResponse(htmlAction);
+
     }
 
-    private static byte[] messageToResponse(String message) throws IOException {
+    private static byte[] actionToResponse(Action action) throws IOException {
 
         String contentType;
         String httpResponseHeader;
-        byte [] httpResponseBody;
+        byte[] httpResponseBody = null;
 
-        if (message.endsWith("pdf")) {
+        if (action instanceof FileAction) {
             httpResponseBody = composeHttpResponseBodyPdf();
-        } else {
-            httpResponseBody = composeHttpResponseBody(message);
+        }
+        if (action instanceof HtmlAction) {
+            HtmlAction htmlAction = (HtmlAction) action;
+            httpResponseBody = composeHttpResponseBody(htmlAction.html);
         }
 
         int contentLength = httpResponseBody.length;
-        contentType = responseContentType(message);
+        contentType = responseContentType(action);
         httpResponseHeader = composeHttpResponseHeader(contentLength, contentType);
         byte header[] = httpResponseHeader.getBytes();
         byte body[] = httpResponseBody;
@@ -87,9 +115,9 @@ public class WebServer {
         return httpResponse;
     }
 
-    private static String responseContentType(String message) {
+    private static String responseContentType(Action action) {
 
-        if (message.contains("pdf")) {
+        if (action instanceof FileAction) {
             String contentType = "application/pdf";
             return contentType;
         }
