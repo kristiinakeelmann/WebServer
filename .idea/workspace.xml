@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="955b9675-e998-4a53-bd58-4086fd1c37d1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/out/production/WebServer/Action.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/WebServer/FileAction.class" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/out/production/WebServer/HtmlAction.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/WebServer/FileAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WebServer/FileAction.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/WebServer/HtmlAction.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WebServer/HtmlAction.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/WebServer/WebApplication.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WebServer/WebApplication.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/WebServer/WebServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WebServer/WebServer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WebApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebApplication.java" afterDir="false" />
@@ -103,7 +101,7 @@
       <workItem from="1569760252136" duration="37512000" />
       <workItem from="1570016309203" duration="13779000" />
       <workItem from="1570123812364" duration="90000" />
-      <workItem from="1570123904935" duration="6499000" />
+      <workItem from="1570123904935" duration="13449000" />
     </task>
     <servers />
   </component>
@@ -122,5 +120,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/WebServer.java</url>
+          <line>119</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

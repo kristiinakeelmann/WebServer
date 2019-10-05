@@ -17,6 +17,10 @@ class FileAction implements Action {
     String filename;
 }
 
+class RedirectAction implements Action {
+    String target;
+}
+
 public class WebServer {
 
     int port;
@@ -39,7 +43,9 @@ public class WebServer {
     }
 
     public void addRedirect(String path, String target) {
-
+        RedirectAction redirectAction = new RedirectAction();
+        redirectAction.target = target;
+        routing.put(path, redirectAction);
     }
 
 
@@ -86,6 +92,8 @@ public class WebServer {
 
     private static byte[] actionToResponse(Action action) throws IOException {
 
+        String statusCode;
+        String redirectLocation = "";
         String contentType;
         String httpResponseHeader;
         byte[] httpResponseBody = null;
@@ -97,10 +105,16 @@ public class WebServer {
             HtmlAction htmlAction = (HtmlAction) action;
             httpResponseBody = composeHttpResponseBody(htmlAction.html);
         }
+        if (action instanceof RedirectAction) {
+            RedirectAction redirectAction = (RedirectAction) action;
+            redirectLocation = redirectAction.target;
+            httpResponseBody = composeHttpResponseBody("Redirecting");
+        }
 
+        statusCode = responseStatusCode(action);
         int contentLength = httpResponseBody.length;
         contentType = responseContentType(action);
-        httpResponseHeader = composeHttpResponseHeader(contentLength, contentType);
+        httpResponseHeader = composeHttpResponseHeader(statusCode, redirectLocation, contentLength, contentType);
         byte header[] = httpResponseHeader.getBytes();
         byte body[] = httpResponseBody;
         return getHttpResponseBytes(header, body);
@@ -125,10 +139,22 @@ public class WebServer {
         return contentType;
     }
 
-    public static String composeHttpResponseHeader(int contentLength, String contentType) {
+    private static String responseStatusCode(Action action) {
+
+        if (action instanceof RedirectAction) {
+            String statusCode = "302 Found";
+            return statusCode;
+        }
+        String statusCode = "200 OK";
+        return statusCode;
+    }
+
+
+    public static String composeHttpResponseHeader(String statusCode, String redirectLocation, int contentLength, String contentType) {
 
         String httpResponseHeader =
-                "HTTP/1.1 200 OK\n" +
+                "HTTP/1.1 " + statusCode + "\n" +
+                        "Location: " + redirectLocation + "\n" +
                         "Date: Mon, 27 Jul 2009 12:28:53 GMT\n" +
                         "Server: WebServer\n" +
                         "Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n" +

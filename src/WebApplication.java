@@ -10,6 +10,7 @@ public class WebApplication {
         webServer.addHtml("sup", "reached sup");
         webServer.addHtml("mina", "mina olen pdf");
         webServer.addFile("pdf", "resources/sample.pdf");
+        webServer.addRedirect("redirect", "https://www.google.com");
         webServer.start();
     }
 }
