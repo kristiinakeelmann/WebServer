@@ -85,7 +85,7 @@ public class WebServer {
         }
 
         HtmlAction htmlAction = new HtmlAction();
-        htmlAction.html = "Unknown";
+        htmlAction.html = "It must have disappeared";
         return actionToResponse(htmlAction);
 
     }
@@ -104,6 +104,7 @@ public class WebServer {
         if (action instanceof HtmlAction) {
             HtmlAction htmlAction = (HtmlAction) action;
             httpResponseBody = composeHttpResponseBody(htmlAction.html);
+
         }
         if (action instanceof RedirectAction) {
             RedirectAction redirectAction = (RedirectAction) action;
@@ -145,6 +146,12 @@ public class WebServer {
             String statusCode = "302 Found";
             return statusCode;
         }
+
+        if (action instanceof HtmlAction && ((HtmlAction) action).html == "It must have disappeared") {
+            String statusCode = "404 Not Found";
+            return statusCode;
+        }
+
         String statusCode = "200 OK";
         return statusCode;
     }
