@@ -2,7 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="955b9675-e998-4a53-bd58-4086fd1c37d1" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/WebServerTest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/test/resources/blank.pdf" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WebServer.iml" beforeDir="false" afterPath="$PROJECT_DIR$/WebServer.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/WebServer/WebServer.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/WebServer/WebServer.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WebServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WebServer.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -15,6 +20,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="JUnit4 Test Class" />
       </list>
     </option>
   </component>
@@ -31,8 +37,16 @@
     <ConfirmationsSetting value="2" id="Add" />
   </component>
   <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrary" value="JUnit4" />
+    <property name="com.intellij.testIntegration.createTest.CreateTestDialog.defaultLibrarySuperClass.JUnit4" value="" />
+    <property name="create.test.in.the.same.root" value="true" />
     <property name="extract.method.default.visibility" value="private" />
     <property name="project.structure.last.edited" value="SDKs" />
     <property name="project.structure.proportion" value="0.0" />
@@ -40,7 +54,17 @@
     <property name="settings.editor.selected.configurable" value="play.paths.configuration" />
   </component>
   <component name="RecentsManager">
+    <key name="CreateTestDialog.RecentsKey">
+      <recent name="" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="" />
+    </key>
+    <key name="CreateTestDialog.Recents.Supers">
+      <recent name="" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/test/resources" />
       <recent name="$PROJECT_DIR$/src/resources" />
       <recent name="$PROJECT_DIR$/src" />
     </key>
@@ -57,7 +81,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.WebApplication">
+  <component name="RunManager" selected="JUnit.WebServerTest.actionToResponse_fileAction">
     <configuration name="WebApplication" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="WebApplication" />
       <module name="WebServer" />
@@ -72,12 +96,36 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
+    <configuration name="WebServerTest.actionToResponse_fileAction" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="WebServer" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="WebServerTest" />
+      <option name="METHOD_NAME" value="actionToResponse_fileAction" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="WebServerTest.actionToResponse_htmlAction" type="JUnit" factoryName="JUnit" temporary="true" nameIsGenerated="true">
+      <module name="WebServer" />
+      <option name="PACKAGE_NAME" value="" />
+      <option name="MAIN_CLASS_NAME" value="WebServerTest" />
+      <option name="METHOD_NAME" value="actionToResponse_htmlAction" />
+      <option name="TEST_OBJECT" value="method" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <list>
       <item itemvalue="Application.WebServer" />
       <item itemvalue="Application.WebApplication" />
+      <item itemvalue="JUnit.WebServerTest.actionToResponse_htmlAction" />
+      <item itemvalue="JUnit.WebServerTest.actionToResponse_fileAction" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="JUnit.WebServerTest.actionToResponse_fileAction" />
+        <item itemvalue="JUnit.WebServerTest.actionToResponse_htmlAction" />
         <item itemvalue="Application.WebApplication" />
         <item itemvalue="Application.WebServer" />
       </list>
@@ -96,7 +144,7 @@
       <workItem from="1569760252136" duration="37512000" />
       <workItem from="1570016309203" duration="13779000" />
       <workItem from="1570123812364" duration="90000" />
-      <workItem from="1570123904935" duration="18480000" />
+      <workItem from="1570123904935" duration="22912000" />
     </task>
     <servers />
   </component>
@@ -115,5 +163,16 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/test/WebServerTest.java</url>
+          <line>46</line>
+          <option name="timeStamp" value="20" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

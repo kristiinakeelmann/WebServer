@@ -93,16 +93,18 @@ public class WebServer {
 
     }
 
-    private static byte[] actionToResponse(Action action) throws IOException {
+    static byte[] actionToResponse(Action action) throws IOException {
 
         String statusCode;
-        String redirectLocation = "";
+        String redirectLocation = null;
         String contentType;
         String httpResponseHeader;
         byte[] httpResponseBody = null;
 
         if (action instanceof FileAction) {
-            httpResponseBody = composeHttpResponseBodyPdf();
+            FileAction fileAction = (FileAction) action;
+            httpResponseBody = composeHttpResponseBodyPdf(fileAction.filename);
+
         }
         if (action instanceof HtmlAction) {
             HtmlAction htmlAction = (HtmlAction) action;
@@ -166,14 +168,11 @@ public class WebServer {
 
         String httpResponseHeader =
                 "HTTP/1.1 " + statusCode + "\n" +
-                        "Location: " + redirectLocation + "\n" +
-                        "Date: Mon, 27 Jul 2009 12:28:53 GMT\n" +
+                        (redirectLocation != null ? "Location: " + redirectLocation + "\n" : "") +
                         "Server: WebServer\n" +
-                        "Last-Modified: Wed, 22 Jul 2009 19:15:56 GMT\n" +
                         "Content-Length: " + contentLength + "\n" +
                         "Content-Type: " + contentType + "\n" +
-                        "Content-Disposition: inline" + "\n" +
-                        "Connection: Keep-Alive\n\n";
+                        "\n";
         return httpResponseHeader;
     }
 
@@ -189,9 +188,9 @@ public class WebServer {
         return httpResponseBody.getBytes();
     }
 
-    public static byte[] composeHttpResponseBodyPdf() throws IOException {
+    public static byte[] composeHttpResponseBodyPdf(String fileName) throws IOException {
 
-        byte[] data = WebServer.class.getClassLoader().getResourceAsStream("resources/sample.pdf").readAllBytes();
+        byte[] data = WebServer.class.getClassLoader().getResourceAsStream(fileName).readAllBytes();
         return data;
     }
 }
