@@ -21,6 +21,10 @@ class RedirectAction implements Action {
     String target;
 }
 
+class NotFoundAction implements Action {
+}
+
+
 public class WebServer {
 
     int port;
@@ -84,9 +88,8 @@ public class WebServer {
             }
         }
 
-        HtmlAction htmlAction = new HtmlAction();
-        htmlAction.html = "It must have disappeared";
-        return actionToResponse(htmlAction);
+        NotFoundAction notFoundAction = new NotFoundAction();
+        return actionToResponse(notFoundAction);
 
     }
 
@@ -104,12 +107,14 @@ public class WebServer {
         if (action instanceof HtmlAction) {
             HtmlAction htmlAction = (HtmlAction) action;
             httpResponseBody = composeHttpResponseBody(htmlAction.html);
-
         }
         if (action instanceof RedirectAction) {
             RedirectAction redirectAction = (RedirectAction) action;
             redirectLocation = redirectAction.target;
             httpResponseBody = composeHttpResponseBody("Redirecting");
+        }
+        if (action instanceof NotFoundAction) {
+            httpResponseBody = composeHttpResponseBody("It must have disappeared");
         }
 
         statusCode = responseStatusCode(action);
@@ -147,7 +152,7 @@ public class WebServer {
             return statusCode;
         }
 
-        if (action instanceof HtmlAction && ((HtmlAction) action).html == "It must have disappeared") {
+        if (action instanceof NotFoundAction) {
             String statusCode = "404 Not Found";
             return statusCode;
         }
