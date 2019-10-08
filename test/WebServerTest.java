@@ -38,4 +38,22 @@ public class WebServerTest {
                 "%PDF-1.6"
         ));
     }
+
+    @Test
+    public void actionToResponse_redirectAction() throws IOException {
+
+        RedirectAction action = new RedirectAction();
+        action.target = "https://www.err.ee";
+
+        byte [] result = WebServer.actionToResponse(action);
+
+        String resultAsString = new String(result);
+        assertEquals("HTTP/1.1 302 Found\n" +
+                "Location: https://www.err.ee\n" +
+                "Server: WebServer\n" +
+                "Content-Length: 46\n" +
+                "Content-Type: text/html\n" +
+                "\n" +
+                "<html><body><h1>Redirecting</h1></body></html>", resultAsString);
+    }
 }
