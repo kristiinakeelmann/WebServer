@@ -1,5 +1,7 @@
 import org.junit.Test;
+
 import java.io.IOException;
+
 import static org.junit.Assert.*;
 
 public class WebServerTest {
@@ -45,7 +47,7 @@ public class WebServerTest {
         RedirectAction action = new RedirectAction();
         action.target = "https://www.err.ee";
 
-        byte [] result = WebServer.actionToResponse(action);
+        byte[] result = WebServer.actionToResponse(action);
 
         String resultAsString = new String(result);
         assertEquals("HTTP/1.1 302 Found\n" +
@@ -55,5 +57,21 @@ public class WebServerTest {
                 "Content-Type: text/html\n" +
                 "\n" +
                 "<html><body><h1>Redirecting</h1></body></html>", resultAsString);
+    }
+
+    @Test
+    public void actionToResponse_notFoundAction() throws IOException {
+
+        NotFoundAction action = new NotFoundAction();
+
+        byte[] result = WebServer.actionToResponse(action);
+
+        String resultAsString = new String(result);
+        assertEquals("HTTP/1.1 404 Not Found\n" +
+                "Server: WebServer\n" +
+                "Content-Length: 59\n" +
+                "Content-Type: text/html\n" +
+                "\n" +
+                "<html><body><h1>It must have disappeared</h1></body></html>", resultAsString);
     }
 }
